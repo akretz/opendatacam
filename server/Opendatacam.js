@@ -68,6 +68,7 @@ const initialState = {
     counterEnabled: true,
     pathfinderEnabled: true,
     heatmapEnabled: false,
+    threeDViewEnabled: true,
   },
   isListeningToYOLO: false,
   HTTPRequestListeningToYOLO: null,
@@ -314,6 +315,14 @@ module.exports = {
 
     let trackerDataForThisFrame = Opendatacam.tracker.getJSONOfTrackedItems();
     let countedItemsForThisFrame = [];
+
+    if (Opendatacam.threeDTrackerManager !== null) {
+      Opendatacam.threeDTrackerManager.updateStates(
+        trackerDataForThisFrame.filter((d) =>
+          config.THREED_SETTINGS.classesToTrack.includes(d.name) && d.isZombie === false
+        ),
+        Opendatacam.currentFrame);
+    }
 
     Opendatacam.nbItemsTrackedThisFrame = trackerDataForThisFrame.length;
 
@@ -908,6 +917,10 @@ module.exports = {
 
   setDatabase(db) {
     Opendatacam.database = db;
+  },
+
+  setThreeDTrackerManager(threeDTrackerManager) {
+    Opendatacam.threeDTrackerManager = threeDTrackerManager;
   },
 
   on(event, listener) {

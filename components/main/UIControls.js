@@ -66,12 +66,21 @@ class UIControls extends Component {
               {this.props.uiSettings.get('pathfinderEnabled')
                 && (
                 <button
-                  className={`btn btn-default rounded-r ${this.props.mode === MODE.PATHVIEW ? 'btn-default--active' : ''}`}
+                  className={`btn btn-default border-r border-l border-default-soft border-solid ${this.props.mode === MODE.PATHVIEW ? 'btn-default--active' : ''} ${this.props.uiSettings.get('threeDViewEnabled') ? '' : 'rounded-r'}`}
                   onClick={() => this.props.dispatch(setMode(MODE.PATHVIEW))}
                 >
                   Pathfinder
                 </button>
                 )}
+              {this.props.uiSettings.get('threeDViewEnabled')
+              && (
+                <button
+                  className={`btn btn-default rounded-r ${this.props.mode === MODE.THREEDVIEW ? 'btn-default--active' : ''}`}
+                  onClick={() => this.props.dispatch(setMode(MODE.THREEDVIEW))}
+                >
+                  3D view
+                </button>
+              )}
             </div>
             <div className="nav-right mt-2 mr-2 flex">
               <button

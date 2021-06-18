@@ -14,6 +14,7 @@ const ip = require('ip');
 const flatten = require('lodash.flatten');
 const intercept = require('intercept-stdout');
 const { Tracker } = require('node-moving-things-tracker');
+const { Camera } = require('3d-vehicles');
 const cloneDeep = require('lodash.clonedeep');
 const Opendatacam = require('./server/Opendatacam');
 const { getURLData } = require('./server/utils/urlHelper');
@@ -22,6 +23,7 @@ const { MjpegProxy } = require('./server/utils/mjpegproxy');
 const config = require('./config.json');
 const configHelper = require('./server/utils/configHelper');
 const GpsTracker = require('./server/tracker/GpsTracker');
+const ThreeDTrackerManager = require('./server/tracker/ThreeDTrackerManager');
 const packageJson = require('./package.json');
 const { YoloDarknet } = require('./server/processes/YoloDarknet');
 const { MongoDbManager } = require('./server/db/MongoDbManager');
@@ -113,6 +115,12 @@ if (dbManager !== null) {
   Opendatacam.setDatabase(dbManager);
 } else {
   console.warn('No or unknown database configured.');
+}
+
+const is3DEnabled = config.THREED_SETTINGS && config.THREED_SETTINGS.enabled === true;
+if (is3DEnabled) {
+  const camera = new Camera(config.THREED_SETTINGS.cameraMatrix);
+  Opendatacam.setThreeDTrackerManager(new ThreeDTrackerManager(camera));
 }
 
 let stdoutBuffer = '';

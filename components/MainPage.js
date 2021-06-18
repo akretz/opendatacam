@@ -10,6 +10,7 @@ import { startListeningToServerData } from '../statemanagement/app/AppStateManag
 import LiveView from './main/LiveView';
 import CounterView from './main/CounterView';
 import PathView from './main/PathView';
+import ThreeDView from './main/ThreeDView';
 import ConsoleView from './main/ConsoleView';
 import DataView from './main/DataView';
 
@@ -19,6 +20,7 @@ import Menu from './main/Menu';
 import InitializingView from './shared/InitializingView';
 import { loadUserSettings } from '../statemanagement/app/UserSettingsStateManagement';
 import TrackerAccuracyView from './shared/TrackerAccuracyView';
+import { Camera } from '3d-vehicles';
 
 class MainPage extends React.PureComponent {
   constructor(props) {
@@ -37,6 +39,7 @@ class MainPage extends React.PureComponent {
     this.props.dispatch(startListeningToServerData());
     // Make config available on window global
     window.CONFIG = this.props.config.toJS();
+    window.camera = new Camera(window.CONFIG.THREED_SETTINGS.cameraMatrix);
   }
 
   onDrop(event) {
@@ -109,6 +112,8 @@ class MainPage extends React.PureComponent {
             {/* Hide it on pathview mode */}
             {this.props.uiSettings.get('heatmapEnabled')
               && <TrackerAccuracyView hidden={this.props.mode === MODE.PATHVIEW} />}
+            {this.props.uiSettings.get('threeDViewEnabled') && this.props.mode === MODE.THREEDVIEW
+              && <ThreeDView />}
             <WebcamStream />
           </>
           )}

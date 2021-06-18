@@ -96,5 +96,12 @@
     "hostname": "localhost",
     "signalLossTimeoutSeconds": 60,
     "csvExportOpenStreetMapsUrl": true
+  },
+  "THREED_SETTINGS": {
+    "enabled": true,
+    "cameraMatrix": [[9.55429904e+02, -7.90635142e+00, -9.32265387e+01, 7.65590415e+03],
+      [6.64059564e+01, 1.15021110e+02, -8.73819428e+02, 7.60237752e+03],
+      [4.90470427e-01, 8.49539047e-01, -1.94221956e-01, 2.17763924e+01]],
+    "classesToTrack": ["car"]
   }
 }

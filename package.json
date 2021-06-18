@@ -10,6 +10,7 @@
     "test": "scripts/npm/test.sh"
   },
   "dependencies": {
+    "3d-vehicles": "^0.0.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "csv-express": "^1.2.2",

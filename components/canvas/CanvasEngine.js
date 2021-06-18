@@ -6,8 +6,10 @@ import { CANVAS_RENDERING_MODE } from '../../utils/constants';
 import LiveViewEngine from './engines/LiveViewEngine';
 import PathViewEngine from './engines/PathViewEngine';
 import TrackerAccuracyEngine from './engines/TrackerAccuracyEngine';
+import ThreeDViewEngine from './engines/ThreeDViewEngine';
 
 import { scaleDetection } from '../../utils/resolution';
+import Camera from '3d-vehicles';
 
 class CanvasEngine extends PureComponent {
   constructor(props) {
@@ -110,6 +112,21 @@ class CanvasEngine extends PureComponent {
 
       if (this.props.mode === CANVAS_RENDERING_MODE.TRACKER_ACCURACY) {
         this.TrackerAccuracyEngine.drawAccuracyHeatmap(
+          this.canvasContext,
+          this.props.trackerData.data,
+          this.props.fixedResolution || this.props.canvasResolution.toJS(),
+          this.props.originalResolution,
+        );
+      }
+
+      if (this.props.mode === CANVAS_RENDERING_MODE.THREEDVIEW) {
+        ThreeDViewEngine.drawAxes(
+          this.canvasContext,
+          this.props.trackerData.data,
+          this.props.fixedResolution || this.props.canvasResolution.toJS(),
+          this.props.originalResolution,
+        );
+        ThreeDViewEngine.drawVehicles(
           this.canvasContext,
           this.props.trackerData.data,
           this.props.fixedResolution || this.props.canvasResolution.toJS(),

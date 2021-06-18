@@ -2,6 +2,7 @@ export const MODE = {
   LIVEVIEW: 'liveview',
   COUNTERVIEW: 'counterview',
   PATHVIEW: 'pathview',
+  THREEDVIEW: '3dview',
   DATAVIEW: 'dataview',
   CONSOLEVIEW: 'consoleview',
 };
@@ -13,6 +14,7 @@ export const CANVAS_RENDERING_MODE = {
   PATHVIEW: 'pathview',
   COUNTING_AREAS: 'countingareas',
   TRACKER_ACCURACY: 'tracker_accuracy',
+  THREEDVIEW: '3dview',
 };
 
 export const COUNTING_AREA_TYPE = {
