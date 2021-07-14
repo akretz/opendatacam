@@ -1,5 +1,4 @@
 import { scalePoint } from '../../../utils/resolution';
-import { computeBoundingBox } from '../../../../3d-vehicles/lib/util';
 import { VehicleState } from '3d-vehicles';
 
 const AXES_COORDS = [
